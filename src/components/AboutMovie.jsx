@@ -19,7 +19,7 @@ const AboutMovie = ({ movie, ACCESS_KEY, addToBanList }) => {
 
     const getEnglishName = (langCode) => {
         const langObj = languages.find(lang => lang.iso_639_1 === langCode);
-        return langObj ? langObj.english_name : langCode;  // If language is not found, return the language code
+        return langObj ? langObj.english_name : langCode;
     }
 
     if (!movie) return <p>Loading...</p>;

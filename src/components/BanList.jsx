@@ -4,14 +4,17 @@ const BanList = ({ banList, removeFromBanList }) => {
     return (
         <div className="ban-list">
             <h3>Ban List</h3>
-            <ul>
+            <div>
                 {banList.map((attribute, index) => (
-                    <li key={index}>
+                    <button 
+                        key={index} 
+                        className="ban-item"
+                        onClick={() => removeFromBanList(attribute)}
+                    >
                         {attribute}
-                        <button onClick={() => removeFromBanList(attribute)}>Remove</button>
-                    </li>
+                    </button>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }

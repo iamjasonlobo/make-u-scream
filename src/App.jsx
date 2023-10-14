@@ -11,6 +11,7 @@ function App() {
   const [prevMovies, setPrevMovies] = useState([]);
   const [horrorGenreId, setHorrorGenreId] = useState(null);
   const [banList, setBanList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchHorrorGenreId = async () => {
@@ -29,21 +30,47 @@ function App() {
     fetchHorrorGenreId();
   }, []);
 
+  const getEnglishName = (langCode, languages) => {
+    const langObj = languages.find(lang => lang.iso_639_1 === langCode);
+    return langObj ? langObj.english_name : langCode;
+}
+
+
   const fetchRandomHorrorMovie = async () => {
+    setIsLoading(true);
     if (!horrorGenreId) return;
 
     try {
-      const randomPage = Math.floor(Math.random() * 100) + 1;
-      const responseMovies = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${ACCESS_KEY}&with_genres=${horrorGenreId}&page=${randomPage}`);
-      const dataMovies = await responseMovies.json();
-      const randomMovie = dataMovies.results[Math.floor(Math.random() * dataMovies.results.length)];
+        const randomPage = Math.floor(Math.random() * 100) + 1;
+        const responseMovies = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${ACCESS_KEY}&with_genres=${horrorGenreId}&page=${randomPage}`);
+        const dataMovies = await responseMovies.json();
 
-      setMovie(randomMovie);
-      setPrevMovies(prevMovies => [...prevMovies, randomMovie]);
-    } catch (error) {
+        // const viableMovies = dataMovies.results.filter(movie => !hasBannedAttributes(movie));
+        const responseLanguages = await fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${ACCESS_KEY}`);
+        const languagesData = await responseLanguages.json();
+        const viableMovies = dataMovies.results.filter(movie => !hasBannedAttributes(movie, languagesData));
+
+        if (viableMovies.length > 0) {
+          const randomMovie = viableMovies[Math.floor(Math.random() * viableMovies.length)];
+          setMovie(randomMovie);
+          setPrevMovies(prevMovies => [...prevMovies, randomMovie]);
+      } else {
+          setMovie(null);
+      }
+  } catch (error) {
       console.error("Error fetching movie data:", error);
-    }
-  };
+  } finally {
+      setIsLoading(false); 
+  }
+};
+
+const hasBannedAttributes = (movie, languages) => {
+  const releaseYear = movie.release_date.split('-')[0];
+  const language = getEnglishName(movie.original_language, languages);
+  const voteAverage = movie.vote_average.toString();
+
+  return banList.includes(releaseYear) || banList.includes(language) || banList.includes(voteAverage);
+};
 
   useEffect(() => {
     fetchRandomHorrorMovie();
@@ -71,12 +98,12 @@ function App() {
           ACCESS_KEY={ACCESS_KEY}
           addToBanList={addToBanList}
         />
-
         <BanList banList={banList} removeFromBanList={removeFromBanList} />
+        <button onClick={fetchRandomHorrorMovie}>Click Me</button>
       </div>
 
       <div className='main'>
-        <MainMovie movie={movie} fetchRandomHorrorMovie={fetchRandomHorrorMovie} />
+      <MainMovie movie={movie} isLoading={isLoading} />
       </div>
     </div>
   )
