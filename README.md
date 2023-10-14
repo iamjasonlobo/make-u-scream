@@ -1,4 +1,4 @@
-# Web Development Project 4 - *Make U Screm*
+# Web Development Project 4 - *Make U Scream*
 
 Submitted by: **Jason Lobo**
 
