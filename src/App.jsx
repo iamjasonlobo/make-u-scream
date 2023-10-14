@@ -36,31 +36,34 @@ function App() {
 }
 
 
-  const fetchRandomHorrorMovie = async () => {
-    setIsLoading(true);
-    if (!horrorGenreId) return;
+const fetchRandomHorrorMovie = async () => {
+  setIsLoading(true);
+  if (!horrorGenreId) return;
 
-    try {
-        const randomPage = Math.floor(Math.random() * 100) + 1;
-        const responseMovies = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${ACCESS_KEY}&with_genres=${horrorGenreId}&page=${randomPage}`);
-        const dataMovies = await responseMovies.json();
+  try {
+    const randomPage = Math.floor(Math.random() * 100) + 1;
+    const responseMovies = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${ACCESS_KEY}&with_genres=${horrorGenreId}&page=${randomPage}`);
+    const dataMovies = await responseMovies.json();
 
-        // const viableMovies = dataMovies.results.filter(movie => !hasBannedAttributes(movie));
-        const responseLanguages = await fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${ACCESS_KEY}`);
-        const languagesData = await responseLanguages.json();
-        const viableMovies = dataMovies.results.filter(movie => !hasBannedAttributes(movie, languagesData));
+    const responseLanguages = await fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${ACCESS_KEY}`);
+    const languagesData = await responseLanguages.json();
 
-        if (viableMovies.length > 0) {
-          const randomMovie = viableMovies[Math.floor(Math.random() * viableMovies.length)];
-          setMovie(randomMovie);
-          setPrevMovies(prevMovies => [...prevMovies, randomMovie]);
-      } else {
-          setMovie(null);
-      }
+    const viableMovies = dataMovies.results.filter(movie => 
+      !hasBannedAttributes(movie, languagesData) && 
+      !prevMovies.includes(movie.id)
+    );
+
+    if (viableMovies.length > 0) {
+      const randomMovie = viableMovies[Math.floor(Math.random() * viableMovies.length)];
+      setMovie(randomMovie);
+      setPrevMovies(prevMovies => [...prevMovies, randomMovie.id]);
+    } else {
+      setMovie(null);
+    }
   } catch (error) {
-      console.error("Error fetching movie data:", error);
+    console.error("Error fetching movie data:", error);
   } finally {
-      setIsLoading(false); 
+    setIsLoading(false); 
   }
 };
 
