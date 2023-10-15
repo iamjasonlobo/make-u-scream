@@ -26,28 +26,12 @@ const AboutMovie = ({ movie, ACCESS_KEY, addToBanList }) => {
     const releaseYear = movie.release_date.split('-')[0];
 
     return (
-        <div>
             <div className="movie-info">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>About</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><button onClick={() => addToBanList(releaseYear)}>{releaseYear}</button></td>
-                        </tr>
-                        <tr>
-                            <td><button onClick={() => addToBanList(getEnglishName(movie.original_language))}>{getEnglishName(movie.original_language)}</button></td>
-                        </tr>
-                        <tr>
-                            <td><button onClick={() => addToBanList(movie.vote_average.toString())}>{movie.vote_average}</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h3>About Movie</h3>
+                        <button className='about-btn' onClick={() => addToBanList(releaseYear)}>{releaseYear}</button>
+                        <button className='about-btn' onClick={() => addToBanList(getEnglishName(movie.original_language))}>{getEnglishName(movie.original_language)}</button>
+                        <button className='about-btn' onClick={() => addToBanList(movie.vote_average.toString())}>{movie.vote_average}</button>
             </div>
-        </div>
     );
 }
 

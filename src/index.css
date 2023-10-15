@@ -10,19 +10,18 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #FF0000;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #FF0000;
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  place-items: top;
+  height: 100vh;
 }
 
 h1 {
@@ -37,14 +36,130 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #131313;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #FF0000;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.ban-list .scrollable-banlist {
+  height: 30vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column; 
+  padding: 10px 0px;
+}
+
+.ban-item {
+  margin-bottom: 5px;
+  width: 98%;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  margin-left: auto;
+}
+
+.home {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 20%;
+  height: 100%;
+  position:relative;
+  justify-content: center;
+  text-align: center;
+}
+
+.main {
+  width: 80%;
+  position: relative;
+  height: 100%;
+}
+
+.movie-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    flex-direction: column-reverse;
+  }
+
+  .App, .sidebar, .main {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.movie-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2.5em;
+  padding: 20px 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  backdrop-filter: blur(10px);
+  margin: 0px;
+}
+
+.logo-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-img {
+  width: 90%;
+}
+
+.generate-btn {
+  font-family: 'Nosifer', cursive;
+  position: absolute;
+  width: 95%;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1000;
+  background-color: #FF0000;
+  border: 1px solid transparent;
+  font-weight: bold;
+  font-size: 1.em;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.generate-btn:hover {
+  border-color: white;
+}
+.generate-btn:focus,
+.generate-btn:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.about-btn{
+  width: 95%;
+  margin-bottom: 5px;
+}
+
+.movie-info {
+  margin-left: auto;
 }

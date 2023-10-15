@@ -4,7 +4,7 @@ const BanList = ({ banList, removeFromBanList }) => {
     return (
         <div className="ban-list">
             <h3>Ban List</h3>
-            <div>
+            <div className="scrollable-banlist">
                 {banList.map((attribute, index) => (
                     <button 
                         key={index} 
@@ -17,6 +17,6 @@ const BanList = ({ banList, removeFromBanList }) => {
             </div>
         </div>
     );
-}
+};
 
 export default BanList;

@@ -7,13 +7,12 @@ const MainMovie = ({ movie, isLoading}) => {
     const imageUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
 
     return (
-        <div>
-            <div className="movie-container" style={{ backgroundImage: `url(${imageUrl})`, width: '500px', height: '300px', backgroundSize: 'cover' }}>
+        
+            <div className="movie-container" style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: 'cover' }}>
                 <div className="movie-info">
-                    <h2>{movie.title}</h2>
+                    <h2 className='movie-title'>{movie.title}</h2>
                 </div>
             </div>
-        </div>
     );
 }
 
