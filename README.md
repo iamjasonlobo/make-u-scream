@@ -1,4 +1,4 @@
-# Web Development Project 4 - *Make U Scream*
+# Web Development Project 4 - *Make You Scream*
 
 Submitted by: **Jason Lobo**
 
@@ -27,7 +27,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.giphy.com/media/r0qx3ThOEvEpBY/giphy.webp' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://s6.gifyu.com/images/S6ilx.gif' title='Video Walkthrough' width='500px' alt='Video Walkthrough' />
 
 
 GIF created with ...  
