@@ -27,7 +27,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://s6.gifyu.com/images/S6ilx.gif' title='Video Walkthrough' width='500px' alt='Video Walkthrough' />
+<img src='https://s6.gifyu.com/images/S6ilw.gif' title='Video Walkthrough' width='500px' alt='Video Walkthrough' />
 
 
 GIF created with ...  
